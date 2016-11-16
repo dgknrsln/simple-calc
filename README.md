@@ -1,6 +1,6 @@
 # simple-calc
 A simple android calculation project.
 
-<img width="25%" src="https://raw.github.com/dgknrsln/simple-calc/master/Screenshots/screenshots1.png"/>
-<img width="25%" src="https://raw.github.com/dgknrsln/simple-calc/master/Screenshots/screenshots2.png"/>
-<img width="25%" src="https://raw.github.com/dgknrsln/simple-calc/master/Screenshots/screenshots3.png"/>
+<img width="25%" src="https://github.com/dgknrsln/simple-calc/blob/master/screenshot.png"/>
+<img width="25%" src="https://github.com/dgknrsln/simple-calc/blob/master/screenshot2.png"/>
+<img width="25%" src="https://github.com/dgknrsln/simple-calc/blob/master/screenshot3.png"/>
