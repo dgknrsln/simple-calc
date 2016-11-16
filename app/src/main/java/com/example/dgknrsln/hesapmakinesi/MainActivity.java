@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if(intNum2==0){
-                    tvScreen.setText("Hata");
+                    tvScreen.setText("Err");
                 }else{
                     Double result = intNum1 / intNum2;
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }catch(Exception e){
-            tvScreen.setText("Hata");
+            tvScreen.setText("Err");
         }
 
 
