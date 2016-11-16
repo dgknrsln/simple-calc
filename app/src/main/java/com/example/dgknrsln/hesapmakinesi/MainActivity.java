@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    int intNum1, intNum2;
+    double intNum1, intNum2;
     String strNum1, strNum2;
     String resultScreen = "", operator ="";
     TextView tvScreen;
@@ -24,57 +24,89 @@ public class MainActivity extends AppCompatActivity {
     /*Print result to TextView*/
     public void result(View v){
 
+        tvScreen = (TextView)findViewById(R.id.textView);
+
         try{
             if(operator.equals("+")){
                 strNum1 = resultScreen.substring(0,resultScreen.indexOf("+"));
                 strNum2 = resultScreen.substring(resultScreen.indexOf("+")+1,resultScreen.length());
 
-                intNum1 = Integer.parseInt(strNum1);
-                intNum2 = Integer.parseInt(strNum2);
+                intNum1 = Double.parseDouble(strNum1);
+                intNum2 = Double.parseDouble(strNum2);
 
-                int result = intNum1 + intNum2;
+                Double result = intNum1 + intNum2;
 
-                resultScreen = Integer.toString(result);
+                int intResult = result.intValue();
+                if(intResult<result){
+                    resultScreen = Double.toString(result);
+                }else if(intResult==result){
+                    resultScreen = Integer.toString(intResult);
+                }
+
+                tvScreen.setText(resultScreen);
 
             }else if(operator.equals("-")){
                 strNum1 = resultScreen.substring(0,resultScreen.indexOf("-"));
                 strNum2 = resultScreen.substring(resultScreen.indexOf("-")+1,resultScreen.length());
 
-                intNum1 = Integer.parseInt(strNum1);
-                intNum2 = Integer.parseInt(strNum2);
+                intNum1 = Double.parseDouble(strNum1);
+                intNum2 = Double.parseDouble(strNum2);
 
-                int result = intNum1 - intNum2;
+                Double result = intNum1 - intNum2;
 
-                resultScreen = Integer.toString(result);
+                int intResult = result.intValue();
 
-            }if(operator.equals("*")){
+                if(intResult<result){
+                    resultScreen = Double.toString(result);
+                }else if(intResult==result){
+                    resultScreen = Integer.toString(intResult);
+                }
+                tvScreen.setText(resultScreen);
+
+            }else if(operator.equals("*")){
                 strNum1 = resultScreen.substring(0,resultScreen.indexOf("*"));
                 strNum2 = resultScreen.substring(resultScreen.indexOf("*")+1,resultScreen.length());
 
-                intNum1 = Integer.parseInt(strNum1);
-                intNum2 = Integer.parseInt(strNum2);
+                intNum1 = Double.parseDouble(strNum1);
+                intNum2 = Double.parseDouble(strNum2);
 
-                int result = intNum1 * intNum2;
+                Double result = intNum1 * intNum2;
 
-                resultScreen = Integer.toString(result);
+                int intResult = result.intValue();
+                if(intResult<result){
+                    resultScreen = Double.toString(result);
+                }else if(intResult==result){
+                    resultScreen = Integer.toString(intResult);
+                }
+                tvScreen.setText(resultScreen);
 
-            }if(operator.equals("/")){
+            }else if(operator.equals("/")){
                 strNum1 = resultScreen.substring(0,resultScreen.indexOf("/"));
                 strNum2 = resultScreen.substring(resultScreen.indexOf("/")+1,resultScreen.length());
 
-                intNum1 = Integer.parseInt(strNum1);
-                intNum2 = Integer.parseInt(strNum2);
+                intNum1 = Double.parseDouble(strNum1);
+                intNum2 = Double.parseDouble(strNum2);
 
-                int result = intNum1 / intNum2;
 
-                resultScreen = Integer.toString(result);
+                if(intNum2==0){
+                    tvScreen.setText("Hata");
+                }else{
+                    Double result = intNum1 / intNum2;
+
+                    int intResult = result.intValue();
+                    if(intResult<result){
+                        resultScreen = Double.toString(result);
+                    }else if(intResult==result){
+                        resultScreen = Integer.toString(intResult);
+                    }
+                    tvScreen.setText(resultScreen);
+                }
+
 
             }
 
-            tvScreen = (TextView) findViewById(R.id.textView);
-            tvScreen.setText(resultScreen);
         }catch(Exception e){
-            Toast.makeText(getApplicationContext(), "Error! Try again.", Toast.LENGTH_SHORT).show();
+            tvScreen.setText("Hata");
         }
 
 
@@ -82,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     /*All clear*/
     public void allClear(View v){
-
-        tvScreen = (TextView) findViewById(R.id.textView);
+        tvScreen = (TextView)findViewById(R.id.textView);
         resultScreen = "";
         tvScreen.setText(resultScreen);
 
@@ -91,13 +122,18 @@ public class MainActivity extends AppCompatActivity {
     /*Delete*/
     public void delete(View V){
 
-        resultScreen = resultScreen.substring(0,resultScreen.length()-1);
-        tvScreen.setText(resultScreen);
+        tvScreen = (TextView)findViewById(R.id.textView);
 
+        try{
+            resultScreen = resultScreen.substring(0,resultScreen.length()-1);
+            tvScreen.setText(resultScreen);
+        }catch(Exception e){
+
+        }
     }
     /*Print number or operator to TextView*/
     public void printScreen(String element){
-        tvScreen = (TextView) findViewById(R.id.textView);
+        tvScreen = (TextView)findViewById(R.id.textView);
         resultScreen = resultScreen + element;
         tvScreen.setText(resultScreen);
     }
@@ -147,6 +183,14 @@ public class MainActivity extends AppCompatActivity {
     public void divide(View v){
         printScreen("/");
         operator = "/";
+    }
+    public void dot(View v){
+        printScreen(".");
+    }
+    public void rightBracket(View v){
+        printScreen(")");
+    }public void leftBracket(View v){
+        printScreen("(");
     }
 
 
