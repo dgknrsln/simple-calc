@@ -28,35 +28,6 @@
         android:layout_toRightOf="@+id/three"
         android:layout_toEndOf="@+id/three" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp"
-        android:id="@+id/textView"
-        android:textSize="36sp"
-        android:textAlignment="viewEnd"
-        android:typeface="monospace"
-        android:fontFamily="monospace"
-        android:textColor="@android:color/holo_red_light"
-        android:layout_height="100dp" />
-
-    <Button
-        android:text="2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/two"
-        android:elevation="0dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:visibility="visible"
-        android:textColor="@android:color/holo_green_light"
-        android:textSize="36sp"
-        android:layout_alignBaseline="@+id/button"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
-        android:onClick="two" />
-
     <Button
         android:text="6"
         android:layout_width="wrap_content"
@@ -348,5 +319,34 @@
         android:layout_alignBottom="@+id/dot"
         android:layout_toRightOf="@+id/button"
         android:layout_toEndOf="@+id/button" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:textSize="36sp"
+        android:textAlignment="viewEnd"
+        android:typeface="monospace"
+        android:fontFamily="monospace"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:layout_weight="5.30" />
+
+    <Button
+        android:text="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/two"
+        android:elevation="0dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:visibility="visible"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="36sp"
+        android:onClick="two"
+        android:layout_alignBaseline="@+id/three"
+        android:layout_alignBottom="@+id/three"
+        android:layout_toEndOf="@+id/button4" />
 
 </RelativeLayout>

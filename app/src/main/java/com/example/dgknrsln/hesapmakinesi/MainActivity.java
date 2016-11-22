@@ -1,10 +1,14 @@
 package com.example.dgknrsln.hesapmakinesi;
 
+import android.icu.math.BigDecimal;
+import android.icu.math.MathContext;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.math.RoundingMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,10 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    double intNum1, intNum2;
+    BigDecimal intNum1, intNum2,result;
     String strNum1, strNum2;
     String resultScreen = "", operator ="";
     TextView tvScreen;
+    MathContext mc;
 
 
 
@@ -28,78 +33,90 @@ public class MainActivity extends AppCompatActivity {
 
         try{
             if(operator.equals("+")){
-                strNum1 = resultScreen.substring(0,resultScreen.indexOf("+"));
-                strNum2 = resultScreen.substring(resultScreen.indexOf("+")+1,resultScreen.length());
 
-                intNum1 = Double.parseDouble(strNum1);
-                intNum2 = Double.parseDouble(strNum2);
-
-                Double result = intNum1 + intNum2;
-
-                int intResult = result.intValue();
-                if(intResult<result){
-                    resultScreen = Double.toString(result);
-                }else if(intResult==result){
-                    resultScreen = Integer.toString(intResult);
+                mc = new MathContext(9);
+                if(resultScreen.indexOf("+")==0){
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("+")+1,resultScreen.length());
+                    intNum1 = result;
+                }else{
+                    strNum1 = resultScreen.substring(0,resultScreen.indexOf("+"));
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("+")+1,resultScreen.length());
+                    intNum1 = new BigDecimal(strNum1);
                 }
 
+                intNum2 = new BigDecimal(strNum2);
+
+                result = intNum1.add(intNum2);
+
+                resultScreen = result.toString();
+
                 tvScreen.setText(resultScreen);
+                resultScreen ="";
 
             }else if(operator.equals("-")){
-                strNum1 = resultScreen.substring(0,resultScreen.indexOf("-"));
-                strNum2 = resultScreen.substring(resultScreen.indexOf("-")+1,resultScreen.length());
 
-                intNum1 = Double.parseDouble(strNum1);
-                intNum2 = Double.parseDouble(strNum2);
-
-                Double result = intNum1 - intNum2;
-
-                int intResult = result.intValue();
-
-                if(intResult<result){
-                    resultScreen = Double.toString(result);
-                }else if(intResult==result){
-                    resultScreen = Integer.toString(intResult);
+                if(resultScreen.indexOf("-")==0){
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("-")+1,resultScreen.length());
+                    intNum1 = result;
+                }else{
+                    strNum1 = resultScreen.substring(0,resultScreen.indexOf("-"));
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("-")+1,resultScreen.length());
+                    intNum1 = new BigDecimal(strNum1);
                 }
+
+                intNum2 = new BigDecimal(strNum2);
+
+                result = intNum1.subtract(intNum2);
+
+                resultScreen = result.toString();
+
                 tvScreen.setText(resultScreen);
+                resultScreen ="";
 
             }else if(operator.equals("*")){
-                strNum1 = resultScreen.substring(0,resultScreen.indexOf("*"));
-                strNum2 = resultScreen.substring(resultScreen.indexOf("*")+1,resultScreen.length());
 
-                intNum1 = Double.parseDouble(strNum1);
-                intNum2 = Double.parseDouble(strNum2);
-
-                Double result = intNum1 * intNum2;
-
-                int intResult = result.intValue();
-                if(intResult<result){
-                    resultScreen = Double.toString(result);
-                }else if(intResult==result){
-                    resultScreen = Integer.toString(intResult);
+                if(resultScreen.indexOf("*")==0){
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("*")+1,resultScreen.length());
+                    intNum1 = result;
+                }else{
+                    strNum1 = resultScreen.substring(0,resultScreen.indexOf("*"));
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("*")+1,resultScreen.length());
+                    intNum1 = new BigDecimal(strNum1);
                 }
+
+                intNum2 = new BigDecimal(strNum2);
+
+                result = intNum1.multiply(intNum2);
+
+                resultScreen = result.toString();
+
                 tvScreen.setText(resultScreen);
+                resultScreen ="";
 
             }else if(operator.equals("/")){
-                strNum1 = resultScreen.substring(0,resultScreen.indexOf("/"));
-                strNum2 = resultScreen.substring(resultScreen.indexOf("/")+1,resultScreen.length());
 
-                intNum1 = Double.parseDouble(strNum1);
-                intNum2 = Double.parseDouble(strNum2);
-
-
-                if(intNum2==0){
-                    tvScreen.setText("Err");
+                if(resultScreen.indexOf("/")==0){
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("/")+1,resultScreen.length());
+                    intNum1 = result;
                 }else{
-                    Double result = intNum1 / intNum2;
+                    strNum1 = resultScreen.substring(0,resultScreen.indexOf("/"));
+                    strNum2 = resultScreen.substring(resultScreen.indexOf("/")+1,resultScreen.length());
+                    intNum1 = new BigDecimal(strNum1);
+                }
 
-                    int intResult = result.intValue();
-                    if(intResult<result){
-                        resultScreen = Double.toString(result);
-                    }else if(intResult==result){
-                        resultScreen = Integer.toString(intResult);
-                    }
+                intNum2 = new BigDecimal(strNum2);
+
+
+                if(intNum2.equals(0)){
+                    tvScreen.setText("Err");
+                    resultScreen ="";
+                }else{
+                    result = intNum1.divide(intNum2, 6, BigDecimal.ROUND_HALF_UP);
+
+                    resultScreen = result.toString();
+
                     tvScreen.setText(resultScreen);
+                    resultScreen ="";
                 }
 
 
@@ -107,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
         }catch(Exception e){
             tvScreen.setText("Err");
+            resultScreen ="";
         }
 
 
